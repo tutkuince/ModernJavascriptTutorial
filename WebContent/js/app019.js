@@ -40,9 +40,9 @@ console.log(pElementsOdd);
 pElementsEven.forEach(function (e) {
     e.style.backgroundColor = "orange";
     e.style.color = "#FFF";
-})
+});
 
 pElementsOdd.forEach(function (e) {
     e.style.backgroundColor = "red";
     e.style.color = "#FFF";
-})
+});

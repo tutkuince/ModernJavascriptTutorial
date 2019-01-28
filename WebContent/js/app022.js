@@ -128,5 +128,65 @@
 //     console.log(e.type);
 // }
 
+//      DOM Content Loaded
+
+// document.addEventListener("DOMContentLoaded", load);
+//
+// // DOMContentLoaded
+// function load(e) {
+//     console.log("Page is ready!");
+// }
+
+
+//              INPUT EVENTS
+const filter = document.getElementById("filter");
+
+//
+// focus
+//
+// filter.addEventListener("focus", run);
+
+//
+// blur
+//
+// filter.addEventListener("blur", run);   // not focus
+
+//
+// paste
+//
+// filter.addEventListener("paste", run);  // Ctrl + V
+//
+// function run(e) {
+//     console.log(e.type);
+// }
+
+//
+// copy
+//
+// filter.addEventListener("copy", run);  // Ctrl + c
+//
+// function run(e) {
+//     console.log(e.type);
+// }
+
+
+//
+// cut
+//
+// filter.addEventListener("cut", run);  // Ctrl + x
+//
+// function run(e) {
+//     console.log(e.type);
+// }
+
+//
+// select
+//
+// filter.addEventListener("select", run);
+//
+// function run(e) {
+//     console.log(e.type);
+// }
+
 
 

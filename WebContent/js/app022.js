@@ -139,7 +139,7 @@
 
 
 //              INPUT EVENTS
-const filter = document.getElementById("filter");
+// const filter = document.getElementById("filter");
 
 //
 // focus
@@ -190,3 +190,41 @@ const filter = document.getElementById("filter");
 
 
 
+//                  Event Capturing and Bubbling
+
+
+//
+// Event Bubbling
+//
+// document.querySelector(".container").addEventListener("click", run);
+// document.querySelector(".card.row").addEventListener("click", run1);
+// document.querySelectorAll(".card-body")[1].addEventListener("click", run2);
+//
+// function run(e) {
+//     console.log("Div Container");
+// }
+// function run1(e) {
+//     console.log("Card Row");
+// }
+// function run2(e) {
+//     console.log("Card-Body");
+// }
+
+//
+// Event Capturing or Delegation
+//
+const cardBody = document.querySelectorAll(".card-body")[1];
+
+cardBody.addEventListener("click", run);
+
+function run(e) {
+    if(e.target.className === "fa fa-remove"){
+        console.log("Delete Process");
+    }
+
+    if (e.target.id === "filter")
+        console.log("Filter Process");
+
+    if (e.target.id === "clear-todos")
+        console.log("Delete all Todos");
+}

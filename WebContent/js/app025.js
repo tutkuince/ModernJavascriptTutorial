@@ -4,6 +4,7 @@ const todoInput = document.querySelector("#todo");
 const listGroup = document.querySelector(".list-group");
 const cardBody1 = document.querySelectorAll(".card-body")[0];
 const cardBody2 = document.querySelectorAll(".card-body")[1];
+const filter = document.querySelector("#filter");
 
 eventListeners();
 
@@ -12,6 +13,7 @@ function eventListeners() {
     todoForm.addEventListener("submit", addTodo);
     document.addEventListener("DOMContentLoaded", loadAllTodosToUI);
     cardBody2.addEventListener("click", deleteTodo);
+    filter.addEventListener("keyup", filterTodos);
 }
 
 function addTodo(e) {
@@ -45,6 +47,19 @@ function deleteTodo(e) {
         showAlert("success", `${text} is deleted!`);
     }
 
+}
+
+function filterTodos(e) {
+    const filterValue = e.target.value.toLowerCase();
+    const listItems = document.querySelectorAll(".list-group-item");
+
+    listItems.forEach(function (listItem) {
+       const text = listItem.textContent.toLowerCase();
+       if (text.indexOf(filterValue) === -1){
+           listItem.setAttribute("style", "display : none !important");
+       } else
+           listItem.setAttribute("style", "display : block");
+    });
 }
 
 function deleteTodoFromLocalStorage(text) {

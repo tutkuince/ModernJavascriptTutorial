@@ -19,6 +19,7 @@ function addTodo(e) {
         showAlert("danger", "Please add a todo!");
     else {
         addTodoToUI(newTodo);
+        addTodoToLocalStorage(newTodo);
         showAlert("success", "Todo is added!");
     }
 
@@ -27,6 +28,26 @@ function addTodo(e) {
     e.preventDefault();
 }
 
+// Return todos from Local Storage
+function getTodosFromLocalStorage() {
+    let todos;
+
+    if (localStorage.getItem("todos") === null)
+        todos = [];
+    else
+        todos = JSON.parse(localStorage.getItem("todos"));
+
+    return todos;
+}
+
+// Add new todo to LocalStroage
+function addTodoToLocalStorage(newTodo) {
+    let todos = getTodosFromLocalStorage();
+
+    todos.push(newTodo);
+
+    localStorage.setItem("todos", JSON.stringify(todos));
+}
 
 function showAlert(type, message) {
     /**

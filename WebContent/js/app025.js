@@ -5,6 +5,7 @@ const listGroup = document.querySelector(".list-group");
 const cardBody1 = document.querySelectorAll(".card-body")[0];
 const cardBody2 = document.querySelectorAll(".card-body")[1];
 const filter = document.querySelector("#filter");
+const clearBtn = document.querySelector("#clear-todos");
 
 eventListeners();
 
@@ -14,6 +15,7 @@ function eventListeners() {
     document.addEventListener("DOMContentLoaded", loadAllTodosToUI);
     cardBody2.addEventListener("click", deleteTodo);
     filter.addEventListener("keyup", filterTodos);
+    clearBtn.addEventListener("click", clearAllTasks);
 }
 
 function addTodo(e) {
@@ -60,6 +62,18 @@ function filterTodos(e) {
        } else
            listItem.setAttribute("style", "display : block");
     });
+}
+
+function clearAllTasks() {
+    if(confirm("Would you like to delete all tasks?")){
+        // Clear Tasks from UI
+        document.querySelectorAll(".list-group-item").forEach(l => l.remove());
+
+        // Clear Tasks from Todos
+        localStorage.removeItem("todos");
+    }
+
+
 }
 
 function deleteTodoFromLocalStorage(text) {

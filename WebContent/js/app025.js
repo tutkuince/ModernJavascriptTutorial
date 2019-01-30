@@ -40,9 +40,22 @@ function loadAllTodosToUI() {
 function deleteTodo(e) {
     if (e.target.className === "fa fa-remove"){
         e.target.parentElement.parentElement.remove();
-        showAlert("success", `${e.target.parentElement.parentElement.innerText} is deleted!`);
+        const text = e.target.parentElement.parentElement.innerText;    // textContent
+        deleteTodoFromLocalStorage(text);
+        showAlert("success", `${text} is deleted!`);
     }
 
+}
+
+function deleteTodoFromLocalStorage(text) {
+    let todos = getTodosFromLocalStorage();
+
+    todos.forEach(function (todo, index) {
+        if (todo === text)
+            todos.splice(index, 1);
+    });
+
+    localStorage.setItem("todos", JSON.stringify(todos));
 }
 
 // Return todos from Local Storage

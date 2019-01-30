@@ -18,20 +18,32 @@ function eventListeners() {
     clearBtn.addEventListener("click", clearAllTasks);
 }
 
+// Add Todo
 function addTodo(e) {
-    const newTodo = todoInput.value;
-
+    const newTodo = todoInput.value.trim();
+    console.log(checkTodoEquality(newTodo));
     if (newTodo === "")
         showAlert("danger", "Please add a todo!");
-    else {
+    else if (checkTodoEquality(newTodo.toLowerCase())){
+        showAlert("danger", "You cannot add same todo!");
+    } else {
         addTodoToUI(newTodo);
         addTodoToLocalStorage(newTodo);
         showAlert("success", "Todo is added!");
     }
-
-
-
     e.preventDefault();
+}
+
+// Check Todo Equality
+function checkTodoEquality(newTodo) {
+    let todos = getTodosFromLocalStorage();
+    let value;
+
+    todos.forEach(function (todo) {
+        if (todo.toLowerCase() === newTodo)
+            value = true;
+    });
+    return value;
 }
 
 // Load All Todos to UI

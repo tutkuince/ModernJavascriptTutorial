@@ -2,6 +2,8 @@
 const todoForm = document.querySelector("#todo-form");
 const todoInput = document.querySelector("#todo");
 const listGroup = document.querySelector(".list-group");
+const cardBody1 = document.querySelectorAll(".card-body")[0];
+const cardBody2 = document.querySelectorAll(".card-body")[1];
 
 eventListeners();
 
@@ -13,10 +15,45 @@ function eventListeners() {
 function addTodo(e) {
     const newTodo = todoInput.value;
 
-    addTodoToUI(newTodo);
+    if (newTodo === "")
+        showAlert("danger", "Please add a todo!");
+    else {
+        addTodoToUI(newTodo);
+        showAlert("success", "Todo is added!");
+    }
+
+
 
     e.preventDefault();
 }
+
+
+function showAlert(type, message) {
+    /**
+     * <div class="alert alert-warning" role="alert">
+        This is a warning alert—check it out!
+     </div>
+     * */
+
+    const div = document.createElement("div");
+    div.id = "message";
+    div.className = `alert alert-${type}`;
+    div.appendChild(document.createTextNode(message));
+
+    cardBody1.prepend(div); // add as a first child element
+
+    // setTimeout
+    setTimeout(() => div.remove(), 1000);
+
+    // todoInput.addEventListener("keypress", removeMessage);
+}
+
+// Remove message with keypress in todoInput
+// function removeMessage(e) {
+//     const div = document.querySelector("#message");
+//     if(div !== null)
+//         div.remove();
+// }
 
 function addTodoToUI(newTodo) {
     /**

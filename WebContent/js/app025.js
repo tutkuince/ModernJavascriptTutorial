@@ -29,6 +29,7 @@ function addTodo(e) {
     e.preventDefault();
 }
 
+// Load All Todos to UI
 function loadAllTodosToUI() {
     let todoList = getTodosFromLocalStorage();
 

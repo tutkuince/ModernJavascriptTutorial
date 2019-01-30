@@ -11,6 +11,7 @@ eventListeners();
 function eventListeners() {
     todoForm.addEventListener("submit", addTodo);
     document.addEventListener("DOMContentLoaded", loadAllTodosToUI);
+    cardBody2.addEventListener("click", deleteTodo);
 }
 
 function addTodo(e) {
@@ -34,6 +35,14 @@ function loadAllTodosToUI() {
     let todoList = getTodosFromLocalStorage();
 
     todoList.forEach(t => addTodoToUI(t));
+}
+
+function deleteTodo(e) {
+    if (e.target.className === "fa fa-remove"){
+        e.target.parentElement.parentElement.remove();
+        showAlert("success", `${e.target.parentElement.parentElement.innerText} is deleted!`);
+    }
+
 }
 
 // Return todos from Local Storage

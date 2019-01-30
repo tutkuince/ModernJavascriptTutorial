@@ -10,6 +10,7 @@ eventListeners();
 // All EventListeners
 function eventListeners() {
     todoForm.addEventListener("submit", addTodo);
+    document.addEventListener("DOMContentLoaded", loadAllTodosToUI);
 }
 
 function addTodo(e) {
@@ -26,6 +27,12 @@ function addTodo(e) {
 
 
     e.preventDefault();
+}
+
+function loadAllTodosToUI() {
+    let todoList = getTodosFromLocalStorage();
+
+    todoList.forEach(t => addTodoToUI(t));
 }
 
 // Return todos from Local Storage

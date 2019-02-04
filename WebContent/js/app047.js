@@ -54,6 +54,21 @@ class Request {
         }
         this.xhr.send(JSON.stringify(data));
     }
+
+    // Put Request
+    put(url, data, callback){
+        this.xhr.open("PUT", url, true);
+        this.xhr.setRequestHeader("Content-type", "application/json");
+
+        this.xhr.onload = () => {
+            if (this.xhr.status === 200){
+                callback(null, this.xhr.responseText);  // Success
+            } else {
+                callback("An error occurred! ( PUT Request )", null);   // Error
+            }
+        }
+        this.xhr.send(JSON.stringify(data));    // DO NOT FORGET!!!
+    }
 }
 
 const request = new Request();
@@ -68,14 +83,21 @@ const request = new Request();
 //     }
 // });
 
-const album = {
-    userId: 2,
-    title: "Title Test"
-}
+// const album = {
+//     userId: 2,
+//     title: "Title Test"
+// }
+//
+// request.post("https://jsonplaceholder.typicode.com/albums", album, function (err, response) {
+//    if (err === null)
+//        console.log(response);   // success
+//     else
+//        console.log(err);    // Error
+// });
 
-request.post("https://jsonplaceholder.typicode.com/albums", album, function (err, response) {
-   if (err === null)
-       console.log(response);   // success
+request.put("https://jsonplaceholder.typicode.com/albums/1", {userId: 1, title: "Test Title"}, function (err, response) {
+    if (err === null)
+        console.log(response);  // success
     else
-       console.log(err);    // Error
+        console.log(err);
 });

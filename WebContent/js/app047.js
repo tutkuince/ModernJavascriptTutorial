@@ -31,7 +31,7 @@ class Request {
                 callback(null, this.xhr.responseText);    // after request completed
             } else {
                 // Error
-                callback("An Error occurred!", null);
+                callback("An Error occurred! - ( GET )", null);
             }
         };
 
@@ -69,6 +69,21 @@ class Request {
         }
         this.xhr.send(JSON.stringify(data));    // DO NOT FORGET!!!
     }
+
+    // Delete Request
+    delete(url, callback){
+        this.xhr.open("DELETE", url, true);
+
+        this.xhr.onload = function () {
+            if (this.xhr.status === 200) {
+                callback(null, "Data has been deleted!");  // success
+            } else {
+                callback("An error occurred! - ( DELETE Request )", null);  // error
+            }
+        }.bind(this);
+
+        this.xhr.send();
+    }
 }
 
 const request = new Request();
@@ -95,9 +110,17 @@ const request = new Request();
 //        console.log(err);    // Error
 // });
 
-request.put("https://jsonplaceholder.typicode.com/albums/1", {userId: 1, title: "Test Title"}, function (err, response) {
+// request.put("https://jsonplaceholder.typicode.com/albums/1", {userId: 1, title: "Test Title"}, function (err, response) {
+//     if (err === null)
+//         console.log(response);  // success
+//     else
+//         console.log(err);
+// });
+
+
+request.delete("https://jsonplaceholder.typicode.com/albums/1", function (err, response) {
     if (err === null)
         console.log(response);  // success
     else
-        console.log(err);
+        console.log(err);   // error
 });

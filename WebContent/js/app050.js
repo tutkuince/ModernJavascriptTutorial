@@ -4,7 +4,12 @@ class Request {
 
         return new Promise(((resolve, reject) => {
             fetch(url)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok)
+                        throw Error("An error occurred! Error Code: " + response.status);
+
+                    return response.json();
+                })
                 .then(data => resolve(data))
                 .catch(err => reject(err));
         }));
@@ -20,7 +25,12 @@ class Request {
                     "Content-type": "application/json; charset=UTF-8"
                 }
             })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok)
+                        throw Error("An error occurred! Error Code: " + response.status);
+
+                    return response.json();
+                })
                 .then(data => resolve(data))
                 .catch(err => reject(err));
         });
@@ -35,20 +45,29 @@ class Request {
                     "Content-type": "application/json; charset=UTF-8"
                 }
             })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok)
+                        throw Error("An error occurred! Error Code: " + response.status);
+
+                    return response.json();
+                })
                 .then(data => resolve(data))
                 .catch(err => reject(err));
         });
     }
 
-    delete(url){
+    delete(url) {
         return new Promise((resolve, reject) => {
-           fetch(url, {
-               method: "DELETE"
-           })
-               .then(response => response.json())
-               .then(data => resolve(data))
-               .catch(err => reject(err));
+            fetch(url, {
+                method: "DELETE"
+            })
+                .then(response => {
+                    if (!response.ok)
+                        throw Error("An error occurred! Error Code: " + response.status);
+
+                    resolve("Selected data has been deleted!");
+                })
+                .catch(err => reject(err));
         });
     }
 }
@@ -80,8 +99,5 @@ let albums;
 //     .catch(err => console.log(err));
 
 request.delete("https://jsonplaceholder.typicode.com/albums/1")
-    .then(data => {
-        albums = data;
-        console.log(albums);
-    })
+    .then(message => console.log(message))
     .catch(err => console.log(err));

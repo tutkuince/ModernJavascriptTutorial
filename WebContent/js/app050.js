@@ -40,6 +40,17 @@ class Request {
                 .catch(err => reject(err));
         });
     }
+
+    delete(url){
+        return new Promise((resolve, reject) => {
+           fetch(url, {
+               method: "DELETE"
+           })
+               .then(response => response.json())
+               .then(data => resolve(data))
+               .catch(err => reject(err));
+        });
+    }
 }
 
 const request = new Request();
@@ -61,7 +72,14 @@ let albums;
 //         console.log(albums);
 //     }).catch(err => console.log(err));
 
-request.put("https://jsonplaceholder.typicode.com/albums/1", {userId: 1, title: "Test Title"})
+// request.put("https://jsonplaceholder.typicode.com/albums/1", {userId: 1, title: "Test Title"})
+//     .then(data => {
+//         albums = data;
+//         console.log(albums);
+//     })
+//     .catch(err => console.log(err));
+
+request.delete("https://jsonplaceholder.typicode.com/albums/1")
     .then(data => {
         albums = data;
         console.log(albums);

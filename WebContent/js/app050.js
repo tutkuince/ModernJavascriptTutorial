@@ -26,7 +26,20 @@ class Request {
         });
     }
 
-
+    put(url, data) {
+        return new Promise((resolve, reject) => {
+            fetch(url, {
+                method: "PUT",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+                .then(response => response.json())
+                .then(data => resolve(data))
+                .catch(err => reject(err));
+        });
+    }
 }
 
 const request = new Request();
@@ -42,9 +55,15 @@ let albums;
 
 // console.log(albums); // asynchronous
 
-request.post("https://jsonplaceholder.typicode.com/albums", {userId: 1, title: "Test Title"})
+// request.post("https://jsonplaceholder.typicode.com/albums", {userId: 1, title: "Test Title"})
+//     .then(data => {
+//         albums = data;
+//         console.log(albums);
+//     }).catch(err => console.log(err));
+
+request.put("https://jsonplaceholder.typicode.com/albums/1", {userId: 1, title: "Test Title"})
     .then(data => {
         albums = data;
         console.log(albums);
-    }).catch(err => console.log(err));
-
+    })
+    .catch(err => console.log(err));

@@ -13,12 +13,9 @@ class Request {
 
     post(url, data) {   // POST Request
         return new Promise((resolve, reject) => {
-            fetch("https://jsonplaceholder.typicode.com/albums", {
+            fetch(url, {
                 method: "POST",
-                body: JSON.stringify({
-                    userId: data.userId,
-                    title: data.title
-                }),
+                body: JSON.stringify(data),
                 headers: {
                     "Content-type": "application/json; charset=UTF-8"
                 }
